@@ -36,8 +36,9 @@ For starters, we'll set the camera project to Orthographic (so that the camera w
 > An orthographic projection is a means of representing our objects into a flat, 2d plane, which helps visualize non-3D games with purely 2 dimensional objects. This is in contrast to a perspective projection, which would commonly be used for 3d games!
 
 > Texture sampling/filtering refers to how the pixels of your image behave when rendered on screen. For games with sprites or pixel art, point/nearest neighbor is almost certainly the way to go, but for everything else something else like bilinear sampling would probably be preferable.\
-> Pictured: left (Point/Nearest) vs right (Bilinear) \
-> ![](sampling-example.jpg)
+> Pictured: left (Point/Nearest) vs right (Bilinear)
+> 
+> ![](images/sampling-example.jpg)
 
 ```cs
 //...
@@ -58,7 +59,9 @@ protected override void Update()
 ```
 # Entities and Components
 Before we go any further, let's add some basic assets to our project. 
+
 //insert images here and how to add them to project blabla
+
 in Visual Studio:
 
 in Jetbrains Rider:
@@ -86,7 +89,7 @@ Let's give them some life by attaching a sprite to draw them on screen!
 
 In your project, create a folder/directory named "Content", and add the following ball.png and paddle.png images there. 
 
-![](ball.png) ![](paddle.png)
+![](images/ball.png) ![](images/paddle.png)
 
 Next, we'll go ahead and instantiate a couple ``Texture`` objects to represent them in code.
 
@@ -119,7 +122,7 @@ AddEntity(ball);
 If you run the project now, you'll see your balls and paddles! \
 But you might notice something...
 
-![](butwait.png)
+![](images/butwait.png)
 
 The ball and paddles are really small. Like, REALLY small. Not only that, but they're stuck to the top left corner of the screen? What's happening?
 
@@ -130,7 +133,7 @@ In Easel, every single entity has a ``Transform`` attributed to them. This is us
 
 By default, all entities in Easel are instantiated at position (0, 0), which corresponds to the top left the screen. In computer graphics, it's standard to to have the origin point at the top left of the screen, unlike what you might have seen in math class. 
 
-![](coords.gif)
+![](images/coords.gif)
 
 Alongside this fact, things like scale are automatically set to an x and y value of 1, meaning that any ``Sprite`` components attributed to that entity are rendered as the exact size of the original image you give it. For instance, if you gave the ``Transform``'s x scale value a 2, it would be twice as wide. Our ball.png and paddle.png images are only a few pixels big, so they're accordingly rendered as such in our window.
 
@@ -161,7 +164,7 @@ All the different transformations under ``Transform`` all utilize a ``Vector3``,
 
 Noting the ``BallSize`` and ``PaddleSize`` constants we set earlier, we now know that this code is setting the size of the ball and paddle images to be 5 and 7 times larger, respectively. If you run the program now, you can see this in action!
 
-![](scaleup.png)
+![](images/scaleup.png)
 
 Following this, we'll set all the other relevant aspects of transform. 
 
@@ -182,7 +185,7 @@ rightPlayer.Transform.Position = new Vector3(
 
 The origin represents the center of which the transformation is based around. With (0, 0) representing the top left, sprites are also based around the top left corner by default. The origin changing code is purely meant to help visualize our positional changes better. We do this by setting the origin to the center of the image (half of the width/length).
 
-![](origin.png)
+![](images/origin.png)
 
 After this, we set the position of the ball and paddle entities. Keeping in mind that our window is 600 wide by 400 pixels tall, we set the ball to be in the center of the screen, the left player to be on the center left edge of the screen, and the right player to be on the center right edge of the screen. 
 
@@ -190,4 +193,4 @@ After this, we set the position of the ball and paddle entities. Keeping in mind
 
 With all this done, running our program grants us the correct starting positions for pong!
 
-![](finished-transforms.png)
+![](images/finished-transforms.png)
