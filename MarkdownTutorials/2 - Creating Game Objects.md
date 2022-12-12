@@ -1,0 +1,193 @@
+# Initializing our Scene
+To start off with, let's add a few more namespaces from the Easel engine to our project, that we'll be using in this section.
+At the top of the file, import the following:
+```cs
+using Easel.Entities;
+using Easel.Scenes;  
+using Easel.Entities.Components;
+using Easel.Graphics;
+using System.Numerics;
+
+//...
+```
+Now that we have that out of the way, we can start tackling the basics of Scenes!
+In Easel, each individual "game world" is represented by a ``Scene``. In this tutorial, we won't be implementing anything more than just a base pong game, but in a bigger game, we might want to implement separate areas of play.
+
+In Easel, the ``Scene`` class has its own overridable methods that we can utilize to make certain things happen during certain events. Two methods you'll be commonly using (and the ones that will be mainly used in this tutorial) are the ``Initialize()`` and ``Update()`` methods.
+
+``Initialize()`` is called once upon the ``Scene`` being loaded. Here, we can set up all of the basic game data we want as soon as the scene is loaded.
+
+``Update()`` is called once every frame. That is, to say, at a set rate of 60 frames per second, any code implemented in ``Update()`` will be run. 
+
+With all this in mind, let's begin implementing our ``MainScene``! Let's first override the ``Initialize`` method:
+```cs
+//...
+protected override void Initialize()  
+{  
+    base.Initialize();
+
+}
+```
+Here, note the call to ``base.Initialize();`` - this is needed for any code that might be internally run within the engine upon each and every scene being loaded. 
+
+Now that we've got our ``Initialize()`` method set up, let's do some basic prep work!
+
+For starters, we'll set the camera project to Orthographic (so that the camera will properly render our 2D Sprites) and set each Texture's mode to Nearest/Point. 
+> An orthographic projection is a means of representing our objects into a flat, 2d plane, which helps visualize non-3D games with purely 2 dimensional objects. This is in contrast to a perspective projection, which would commonly be used for 3d games!
+
+> Texture sampling/filtering refers to how the pixels of your image behave when rendered on screen. For games with sprites or pixel art, point/nearest neighbor is almost certainly the way to go, but for everything else something else like bilinear sampling would probably be preferable.\
+> Pictured: left (Point/Nearest) vs right (Bilinear) \
+> ![](sampling-example.jpg)
+
+```cs
+//...
+protected override void Initialize()  
+{  
+    base.Initialize();  
+    Camera.Main.CameraType = CameraType.Orthographic;  
+    World.SpriteRenderMode = SpriteRenderMode.Nearest;
+}
+```
+
+While we're at it, we might as well override the ``Update()`` method as well. We won't be using it for very much, and it won't till much later, but it'll be nice to have it down after we've just gone over it.
+```cs
+protected override void Update()  
+{  
+    base.Update();
+}
+```
+# Entities and Components
+Before we go any further, let's add some basic assets to our project. 
+//insert images here and how to add them to project blabla
+in Visual Studio:
+
+in Jetbrains Rider:
+
+In Easel, entities represent objects in your code that can store all kinds of different ``Component``s. They are basically blank slates meant to store collections of data and behavior, that we can use to define the objects in our game world.
+
+Knowing this, let's start off by initializing some entities for the three main game objects in a game of pong: the ball and two paddles.
+```cs
+protected override void Initialize()  
+{  
+    base.Initialize();  
+    Camera.Main.CameraType = CameraType.Orthographic;  
+    World.SpriteRenderMode = SpriteRenderMode.Nearest;  
+  
+    // We create our paddle and ball entities, add appropriate sprite and associated components, then add them to the scene.  
+    ball = new Entity();  
+    leftPlayer = new Entity();  
+    rightPlayer = new Entity();  
+
+}
+```
+
+These entities don't quite represent anything just yet; they're just empty objects, waiting to be filled with data.
+Let's give them some life by attaching a sprite to draw them on screen!
+
+In your project, create a folder/directory named "Content", and add the following ball.png and paddle.png images there. 
+
+![](ball.png) ![](paddle.png)
+
+Next, we'll go ahead and instantiate a couple ``Texture`` objects to represent them in code.
+
+```cs
+rightPlayer = new Entity();  
+// NEW
+//...
+Texture2D ballTexture = new Texture2D("Content/ball.png");
+Texture2D paddleTexture = new Texture2D("Content/paddle.png");
+```
+
+With this, we can now add ``Sprite`` components to our entities!
+To do this, we can call the ``AddComponent`` method on our ``Entity`` objects:
+
+```cs
+//...
+ball.AddComponent(new Sprite(ballTexture));
+leftPlayer.AddComponent(new Sprite(paddleTexture));
+rightPlayer.AddComponent(new Sprite(paddleTexture));
+```
+
+Walla! you've created three entities and added ``Sprite`` components to all of them! With this, all that's left is to actually add them to the scene, which we can do just by calling the scene's ``AddEntity()`` method.
+
+```cs
+//...
+AddEntity(leftPlayer);
+AddEntity(rightPlayer);
+AddEntity(ball);
+```
+If you run the project now, you'll see your balls and paddles! \
+But you might notice something...
+
+![](butwait.png)
+
+The ball and paddles are really small. Like, REALLY small. Not only that, but they're stuck to the top left corner of the screen? What's happening?
+
+To understand, this, let's look at what a ``Transform`` is.
+
+# Transform
+In Easel, every single entity has a ``Transform`` attributed to them. This is used to represent transformation data, in relation to mathematics. This includes things like position, rotation, scale, and the origin.
+
+By default, all entities in Easel are instantiated at position (0, 0), which corresponds to the top left the screen. In computer graphics, it's standard to to have the origin point at the top left of the screen, unlike what you might have seen in math class. 
+
+![](coords.gif)
+
+Alongside this fact, things like scale are automatically set to an x and y value of 1, meaning that any ``Sprite`` components attributed to that entity are rendered as the exact size of the original image you give it. For instance, if you gave the ``Transform``'s x scale value a 2, it would be twice as wide. Our ball.png and paddle.png images are only a few pixels big, so they're accordingly rendered as such in our window.
+
+To fix this, we can change some of the ``Transform`` values in our ball and paddle entities. Beforehand, let's set some constant values that I've come up with that work great with our game:
+
+```cs
+public class MainScene : Scene
+{
+    public const float PaddleSize = 7f;
+    public const float BallSize = 5f;
+    //...
+```
+
+Underneath the ``AddComponent()`` calls we defined earlier, let's use these constants to set some appropriate values for the position, scale, and origin of our entities.
+
+```cs
+// Initialize
+// ...
+rightPlayer.AddComponent(new Sprite(paddleTexture));
+
+// NEW
+// Some size refactoring to better fit the screen + gameplay
+ball.Transform.Scale = new Vector3(BallSize, BallSize, 1f);
+leftPlayer.Transform.Scale = new Vector3(PaddleSize, PaddleSize, 1f);
+rightPlayer.Transform.Scale = new Vector3(PaddleSize, PaddleSize, 1f);
+```
+All the different transformations under ``Transform`` all utilize a ``Vector3``, representing a mathematical vector. For our purposes, this utilizes the format (x, y, z), but the z axis won't matter for this 2d game. (You'll see I'll always just be setting it to 1)
+
+Noting the ``BallSize`` and ``PaddleSize`` constants we set earlier, we now know that this code is setting the size of the ball and paddle images to be 5 and 7 times larger, respectively. If you run the program now, you can see this in action!
+
+![](scaleup.png)
+
+Following this, we'll set all the other relevant aspects of transform. 
+
+```cs
+//...
+ball.Transform.Origin = new Vector3(ballTexture.Size.Width / 2, ballTexture.Size.Height / 2, 1);
+leftPlayer.Transform.Origin = new Vector3(paddleTexture.Size.Width / 2, paddleTexture.Size.Height / 2, 1);
+rightPlayer.Transform.Origin = new Vector3(paddleTexture.Size.Width / 2, paddleTexture.Size.Height / 2, 1);
+
+ball.Transform.Position = new Vector3(300f, 200f, 1f);
+leftPlayer.Transform.Position = new Vector3(paddleTexture.Size.Width * PaddleSize / 2, Graphics.Viewport.Height / 2, 1f);
+rightPlayer.Transform.Position = new Vector3(
+    Graphics.Viewport.Width - paddleTexture.Size.Width * PaddleSize / 2, 
+    Graphics.Viewport.Height / 2, 
+    1f
+);
+```
+
+The origin represents the center of which the transformation is based around. With (0, 0) representing the top left, sprites are also based around the top left corner by default. The origin changing code is purely meant to help visualize our positional changes better. We do this by setting the origin to the center of the image (half of the width/length).
+
+![](origin.png)
+
+After this, we set the position of the ball and paddle entities. Keeping in mind that our window is 600 wide by 400 pixels tall, we set the ball to be in the center of the screen, the left player to be on the center left edge of the screen, and the right player to be on the center right edge of the screen. 
+
+``Graphics.Viewport`` is a class available under ``Easel.Graphics`` that lets us get the current dimensions of our window, which we use to set the corresponding center in each respective dimension.
+
+With all this done, running our program grants us the correct starting positions for pong!
+
+![](finished-transforms.png)
