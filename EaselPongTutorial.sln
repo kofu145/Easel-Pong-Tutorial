@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EaselPongTutorial", "EaselPongTutorial.csproj", "{6B27542D-B653-422C-AAE9-5B2085E4564C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Easel", "..\Easel\Easel\Easel.csproj", "{78310FF4-3DEE-4337-B3F9-402BEC40B78A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EaselPong-2", "EaselPong-2\EaselPong-2.csproj", "{EDB0A833-9E09-4008-9EEE-16593DA6852A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B27542D-B653-422C-AAE9-5B2085E4564C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B27542D-B653-422C-AAE9-5B2085E4564C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B27542D-B653-422C-AAE9-5B2085E4564C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B27542D-B653-422C-AAE9-5B2085E4564C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78310FF4-3DEE-4337-B3F9-402BEC40B78A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78310FF4-3DEE-4337-B3F9-402BEC40B78A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78310FF4-3DEE-4337-B3F9-402BEC40B78A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78310FF4-3DEE-4337-B3F9-402BEC40B78A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDB0A833-9E09-4008-9EEE-16593DA6852A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDB0A833-9E09-4008-9EEE-16593DA6852A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDB0A833-9E09-4008-9EEE-16593DA6852A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDB0A833-9E09-4008-9EEE-16593DA6852A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
