@@ -54,7 +54,7 @@ Then, thanks to this namespace, we'll go ahead and inherit the ``Scene`` class f
 ```cs
 namespace EaselPong;  
   
-public class Test : Scene  
+public class MainScene : Scene  
 {  
 
 }
