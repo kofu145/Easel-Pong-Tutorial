@@ -16,6 +16,8 @@ To begin with, let's set up some basic game engine code to get a window running!
 ```cs
 using Easel;  
 using Easel.Math;  
+// Note that here, you're importing the namespace of your project.
+// I named my EaselPong, but yours would probably be your ProjectName.
 using EaselPong;
 ```
 Next we'll initialize and instantiate a super basic ``GameSettings`` object, to let Easel know some basic properties of our window. There's quite a few different parameters we can set here, but we won't worry about them in this tutorial.
@@ -52,6 +54,7 @@ using Easel.Scenes;
 ```
 Then, thanks to this namespace, we'll go ahead and inherit the ``Scene`` class from easel.
 ```cs
+// Again, this'll be your project's namespace. My project is named EaselPong, hence the code here.
 namespace EaselPong;  
   
 public class MainScene : Scene  
@@ -63,4 +66,4 @@ public class MainScene : Scene
 With all this set and done, go ahead and run your project!
 You should see a black window, like this:
 
-lol put image of black window basic thing here soon
+![](images/empty-screen.png)

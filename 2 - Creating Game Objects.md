@@ -1,12 +1,13 @@
 # Initializing our Scene
 To start off with, let's add a few more namespaces from the Easel engine to our project, that we'll be using in this section.
-At the top of the file, import the following:
+At the top of ``MainScene.cs``, import the following:
 ```cs
 using Easel.Entities;
 using Easel.Scenes;  
 using Easel.Entities.Components;
 using Easel.Graphics;
 using System.Numerics;
+using Easel.Graphics.Renderers;
 
 //...
 ```
@@ -69,6 +70,21 @@ in Jetbrains Rider:
 In Easel, entities represent objects in your code that can store all kinds of different ``Component``s. They are basically blank slates meant to store collections of data and behavior, that we can use to define the objects in our game world.
 
 Knowing this, let's start off by initializing some entities for the three main game objects in a game of pong: the ball and two paddles.
+
+Let's quickly declare some variables for our entities in our ``MainScene`` class.
+
+```cs
+public class MainScene : Scene
+{
+
+    private Entity ball;
+    private Entity leftPlayer;
+    private Entity rightPlayer;
+    //...
+```
+
+With that settled, let's get everything initialized!
+
 ```cs
 protected override void Initialize()  
 {  
@@ -90,6 +106,8 @@ Let's give them some life by attaching a sprite to draw them on screen!
 In your project, create a folder/directory named "Content", and add the following ball.png and paddle.png images there. 
 
 ![](images/ball.png) ![](images/paddle.png)
+
+> Make sure you also add a reference to where they end up in the output directory!
 
 Next, we'll go ahead and instantiate a couple ``Texture`` objects to represent them in code.
 
