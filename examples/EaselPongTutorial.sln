@@ -6,6 +6,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EaselPong-2", "EaselPong-2\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EaselPong-3", "EaselPong-3\EaselPong-3.csproj", "{91381971-5236-4AD4-B8A7-402D4F9B9650}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EaselPong-1", "EaselPong-1\EaselPong-1.csproj", "{2BB4BE8E-4A7E-4AEA-B28A-E29B464F1E93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EaselPong-4", "EaselPong-4\EaselPong-4.csproj", "{983251FE-916E-4D77-817C-50C533C59072}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,5 +32,13 @@ Global
 		{91381971-5236-4AD4-B8A7-402D4F9B9650}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91381971-5236-4AD4-B8A7-402D4F9B9650}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91381971-5236-4AD4-B8A7-402D4F9B9650}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BB4BE8E-4A7E-4AEA-B28A-E29B464F1E93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BB4BE8E-4A7E-4AEA-B28A-E29B464F1E93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BB4BE8E-4A7E-4AEA-B28A-E29B464F1E93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BB4BE8E-4A7E-4AEA-B28A-E29B464F1E93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{983251FE-916E-4D77-817C-50C533C59072}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{983251FE-916E-4D77-817C-50C533C59072}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{983251FE-916E-4D77-817C-50C533C59072}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{983251FE-916E-4D77-817C-50C533C59072}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -4,8 +4,11 @@ using Easel.Entities.Components;
 using System.Numerics;
 using Easel.Graphics;
 using Easel.Graphics.Renderers;
+using EaselPong.Components;
+
 using Easel.GUI;
 using Easel.Math;
+
 
 namespace EaselPong;
 
@@ -14,6 +17,8 @@ public class MainScene : Scene
     
     public const float PaddleSize = 7f;
     public const float BallSize = 5f;
+    public const float BallSpeed = 300f;
+    public const float PaddleSpeed = 500f;
 
     private Entity ball;
     private Entity leftPlayer;
@@ -32,6 +37,9 @@ public class MainScene : Scene
         ball = new Entity();
         leftPlayer = new Entity();
         rightPlayer = new Entity();
+        
+        leftPlayer.Tag = "paddle";
+        rightPlayer.Tag = "paddle";
 
         Texture2D ballTexture = new Texture2D("Content/ball.png");
         Texture2D paddleTexture = new Texture2D("Content/paddle.png");
@@ -39,6 +47,10 @@ public class MainScene : Scene
         ball.AddComponent(new Sprite(ballTexture));
         leftPlayer.AddComponent(new Sprite(paddleTexture));
         rightPlayer.AddComponent(new Sprite(paddleTexture));
+        
+        ball.AddComponent(new Ball(12.5f, BallSpeed));
+        leftPlayer.AddComponent(new Paddle(Side.Left, PaddleSpeed));
+        rightPlayer.AddComponent(new Paddle(Side.Right, PaddleSpeed));
 
         // Some size refactoring to better fit the screen + gameplay
         ball.Transform.Scale = new Vector3(BallSize, BallSize, 1f);
