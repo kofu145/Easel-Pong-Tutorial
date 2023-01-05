@@ -20,7 +20,7 @@ using Easel.Math;
 // I named my EaselPong, but yours would probably be your ProjectName.
 using EaselPong;
 ```
-Next we'll initialize and instantiate a super basic ``GameSettings`` object, to let Easel know some basic properties of our window. There's quite a few different parameters we can set here, but we won't worry about them in this tutorial.
+Next we'll initialize and instantiate a ``GameSettings`` object, to let Easel know some basic properties of our window. There's quite a few different parameters we can set here, but we won't worry about them in this tutorial.
 ```cs
 GameSettings gameSettings = new GameSettings()  
 {  

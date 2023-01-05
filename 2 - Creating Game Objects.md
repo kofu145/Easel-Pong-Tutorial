@@ -18,7 +18,7 @@ In Easel, the ``Scene`` class has its own overridable methods that we can utiliz
 
 ``Initialize()`` is called once upon the ``Scene`` being loaded. Here, we can set up all of the basic game data we want as soon as the scene is loaded.
 
-``Update()`` is called once every frame. That is, to say, at a set rate of 60 frames per second, any code implemented in ``Update()`` will be run. 
+``Update()`` is called once every frame. That is, to say, if our game was ever running at 60 frames a second, any code implemented in ``Update()`` will be run 60 times a second.
 
 With all this in mind, let's begin implementing our ``MainScene``! Let's first override the ``Initialize`` method:
 ```cs
@@ -31,9 +31,7 @@ protected override void Initialize()
 ```
 Here, note the call to ``base.Initialize();`` - this is needed for any code that might be internally run within the engine upon each and every scene being loaded. 
 
-Now that we've got our ``Initialize()`` method set up, let's do some basic prep work!
-
-For starters, we'll set the camera project to Orthographic (so that the camera will properly render our 2D Sprites) and set each Texture's mode to Nearest/Point. 
+With ``Initialize()`` declared, we can begin implementation. For starters, we'll set the camera project to Orthographic (so that the camera will properly render our 2D Sprites) and set each Texture's mode to Nearest/Point. 
 > An orthographic projection is a means of representing our objects into a flat, 2d plane, which helps visualize non-3D games with purely 2 dimensional objects. This is in contrast to a perspective projection, which would commonly be used for 3d games!
 
 > Texture sampling/filtering refers to how the pixels of your image behave when rendered on screen. For games with sprites or pixel art, point/nearest neighbor is almost certainly the way to go, but for everything else something else like bilinear sampling would probably be preferable.\
@@ -51,7 +49,8 @@ protected override void Initialize()
 }
 ```
 
-While we're at it, we might as well override the ``Update()`` method as well. We won't be using it for very much, and it won't till much later, but it'll be nice to have it down after we've just gone over it.
+We'll also override the ``Update`` method while we're at it. We won't be utilizing the scene's ``Update`` very much, and it won't be till much later, but it'll be nice to have it down after we've just gone over it.
+
 ```cs
 protected override void Update()  
 {  
@@ -129,7 +128,7 @@ leftPlayer.AddComponent(new Sprite(paddleTexture));
 rightPlayer.AddComponent(new Sprite(paddleTexture));
 ```
 
-Walla! you've created three entities and added ``Sprite`` components to all of them! With this, all that's left is to actually add them to the scene, which we can do just by calling the scene's ``AddEntity()`` method.
+Voila! you've created three entities and added ``Sprite`` components to all of them! With this, all that's left is to actually add them to the scene, which we can do just by calling the scene's ``AddEntity()`` method.
 
 ```cs
 //...
@@ -142,7 +141,7 @@ But you might notice something...
 
 ![](images/butwait.png)
 
-The ball and paddles are really small. Like, REALLY small. Not only that, but they're stuck to the top left corner of the screen? What's happening?
+The ball and paddles are really small. Like, REALLY small. Not only that, but they're stuck to the top left corner of the screen! What's happening?
 
 To understand, this, let's look at what a ``Transform`` is.
 

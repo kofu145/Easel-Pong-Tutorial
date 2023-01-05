@@ -2,6 +2,8 @@
 In order to start developing with Easel, let's go over some basic concepts integral to the engine.  
 This guide will go over each core aspect of the engine, explaining how they work and how they relate to each other.
 
+THIS PAGE IS A WORK IN PROGRESS
+
 # EC Pattern
 
 This engine is based off of an EC system, derived from a full [ECS](https://en.wikipedia.org/wiki/Entity_component_system).

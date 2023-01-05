@@ -54,7 +54,7 @@ public class Paddle : Component // NEW
 //...
 ```
 
-> Note that in Easel, every single entity can only hold one of each type of component. So for example, every entity can only ever hold one of the ``Paddle`` component that we are currently creating.
+Note that in Easel, every single entity can only hold one of each type of component. So for example, every entity can only ever hold one of the ``Paddle`` component that we are currently creating.
 
 Let's also quickly define a ``Side`` enum, so that we have some sort of representation for which side the paddle is on. Right after the namespace declaration, and before the class declaration, define the following.
 
@@ -135,7 +135,7 @@ protected override void Initialize()
 //...
 ```
 
-Now we can define our game logic! The only things each paddle needs to do in a game of pong is to exist as something to collide with, and to be able to move up and down. We'll define this logic in our ``Update`` method, which is called once every frame. (Don't worry, we'll break all of this down.)
+Now we can define our game logic! In a game of pong, each paddle just needs to exist as something to collide with, and to be able to move up and down. We'll define this logic in our ``Update`` method, which is called once every frame. (Don't worry, we'll break all of this down.)
 
 ```cs
 //...
@@ -295,7 +295,7 @@ The ball's velocity will be decided during gameplay and change throughout, so we
 
 We also defined an ``Entity`` array variable to store references to our paddles, so that we don't need to constantly need to grab all the entities with paddles every frame. We're defining this variable in ``Initialize`` and not the constructor so that we can safely grab all of our gameobjects upon the game starting up, and not on the ``Ball``'s creation. 
 
-### Tags
+#### Tags
 In order to tell our program what entities are paddles, we'll set the ``Tag`` property of the ``Entity`` objects we're to set our paddles on. In ``MainScene.cs``, right under where we instantiated our entities, we'll set a "paddle" tag to our paddle entities:
 ```cs
 protected override void Initialize()
@@ -357,7 +357,7 @@ We've seen the velocity applied to position before, when we were moving our padd
 
 Next, whenever the ball hits the top or bottom of the screen, we want to make it bounce. We can easily achieve this by simply setting the ball's position to the border of the screen, then reversing the velocity of the ball on the Y axis, as written above.
 
-### Moving the ball
+#### Moving the ball
 
 But wait, we've got all this logic for when the ball hits the bounds of the screen, but we haven't set the velocity to anything or begun moving at all! 
 
@@ -435,7 +435,7 @@ By checking if the position (offset by the radius, so we account for any portion
 
 We've got the ball rolling! (hehe) As of right now, the ball can be served, and any scoring applied correctly, but our paddles can't actually ever "hit" the ball. Rather, if we were to run the program right now, our balls would just go right through! To fix this behavior, we're going to have to implement collisions.
 
-### Checking collisions
+#### Checking collisions
 
 We'll write the base logic of how we can check if the ball and the paddle ever collide in a helper function, as to break it down easier. In essence, all we really need to ever check is if the ball is ever inside of our paddle at any given frame. If it is, we can reverse its X axis velocity and send it flying over to the other side! To do this, we can check if the ball's position is between all 4 sides at the respective axis. 
 

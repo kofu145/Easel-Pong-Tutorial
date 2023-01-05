@@ -41,8 +41,11 @@ public class MainScene : Scene
         leftPlayer.Tag = "paddle";
         rightPlayer.Tag = "paddle";
 
-        Texture2D ballTexture = new Texture2D("Content/ball.png");
+        //Texture2D ballTexture = new Texture2D("Content/ball.png");
         Texture2D paddleTexture = new Texture2D("Content/paddle.png");
+        
+        Texture2D ballTexture = Content.Load<Texture2D>("ball.png");
+
 
         ball.AddComponent(new Sprite(ballTexture));
         leftPlayer.AddComponent(new Sprite(paddleTexture));
